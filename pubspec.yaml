@@ -1,0 +1,37 @@
+name: notes_app
+description: A Notes App with Firebase Authentication and Firestore CRUD operations.
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Firebase Core
+  firebase_core: ^2.27.1
+
+  # Firebase Authentication
+  firebase_auth: ^4.17.9
+
+  # Google Sign-In
+  google_sign_in: ^6.2.1
+
+  # Cloud Firestore
+  cloud_firestore: ^4.15.9
+
+  # UI & Icons
+  cupertino_icons: ^1.0.2
+  google_fonts: ^6.2.1
+  flutter_staggered_animations: ^1.1.1
+  flutter_bloc: ^9.1.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
