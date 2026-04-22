@@ -10,13 +10,9 @@ class NotesCubit extends Cubit<NotesState> {
   final FirebaseService _firebaseService = FirebaseService();
   StreamSubscription<List<NoteModel>>? _notesSubscription;
 
-  // Keep a local copy of notes for error/saving states
   List<NoteModel> _currentNotes = [];
 
   NotesCubit() : super(NotesInitial());
-
-  
-  // Start listening to Firestore in real-time
 
   void listenToNotes(String userId) {
     emit(NotesLoading());
@@ -32,8 +28,6 @@ class NotesCubit extends Cubit<NotesState> {
     });
   }
 
-  // Create Note
-
   Future<void> createNote({
     required String title,
     required String content,
@@ -47,14 +41,11 @@ class NotesCubit extends Cubit<NotesState> {
         content: content.trim(),
         userId: userId,
       );
-      // Stream will auto-update _currentNotes via listenToNotes
       emit(NotesSaved(_currentNotes, 'Note created successfully!'));
     } catch (_) {
       emit(NotesError('Failed to create note. Please try again.', _currentNotes));
     }
   }
-
-  // Update Note
 
   Future<void> updateNote({
     required String noteId,
@@ -75,8 +66,6 @@ class NotesCubit extends Cubit<NotesState> {
     }
   }
 
-  // Delete Note
-
   Future<void> deleteNote(String noteId) async {
     try {
       await _firebaseService.deleteNote(noteId);
@@ -85,8 +74,6 @@ class NotesCubit extends Cubit<NotesState> {
       emit(NotesError('Failed to delete note. Please try again.', _currentNotes));
     }
   }
-
-  // Cleanup
 
   @override
   Future<void> close() {

@@ -1,5 +1,4 @@
 
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../services/firebase_service.dart';
@@ -9,7 +8,6 @@ class AuthCubit extends Cubit<AuthState> {
   final FirebaseService _firebaseService = FirebaseService();
 
   AuthCubit() : super(AuthInitial()) {
-    // Listen to Firebase auth state changes automatically
     _firebaseService.authStateChanges.listen((user) {
       if (user != null) {
         emit(AuthAuthenticated(user));
@@ -19,7 +17,6 @@ class AuthCubit extends Cubit<AuthState> {
     });
   }
 
-  // Google Sign-In
 
   Future<void> signInWithGoogle() async {
     emit(AuthLoading());
@@ -39,7 +36,6 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  // Sign Out
 
   Future<void> signOut() async {
     emit(AuthLoading());
@@ -51,8 +47,6 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  // Format Firebase errors
-  // 
 
   String _formatFirebaseError(FirebaseAuthException e) {
     switch (e.code) {
